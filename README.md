@@ -17,4 +17,4 @@ Codefor港北の保育園マップ
 MITライセンス条件を満たす限り、自由な複製・配布・修正を無制限に行うことができます。ライセンス条件についてはLICENSEをご覧ください。
 
 ### Codefor港北の保育園マップの刷新について
-保育園マップは「Codefor港北の(旧)保育園マップ」(https://github.com/CodeforKohoku/papamama)とは別に新しく作成されたソフトウェアです。
+保育園マップは[Codefor港北の(旧)保育園マップ](https://github.com/CodeforKohoku/papamama/)とは別に新しく作成されたソフトウェアです。
