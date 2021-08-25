@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>港北区保育園マップ by Codefor港北</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+    <link rel="stylesheet" href="css/L.Control.Locate.min.css" type="text/css">
+    <link rel="stylesheet" href="css/base.css" type="text/css">
+    <link rel="stylesheet" href="css/menu.css" type="text/css">
+    <link rel="stylesheet" href="css/filter.css" type="text/css">
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+    <script src="js/L.Control.Locate.min.js"></script> 
+    <script src="js/Bing.js"></script> 
+</head>
+<body>
+    <div id='mapid'></div>
+    <div id="menu-btn-div">
+        <button type="button" id="menu-btn">
+            <img src="images/bars-black.svg" alt="menu">
+        </button>
+    </div>
+    <div id="menu-div">
+        <ul id="menu-ul">
+            <li>
+                <ul id="menu-facility-ul">
+                    <li class='menu-li' id="listPubNinka"><b>公立認可</b></li>
+                    <li class='menu-li' id="listPriNinka"><b>私立認可</b></li>
+                    <li class='menu-li' id="listJigyosho"><b>小規模等</b></li>
+                    <li class='menu-li' id="listYhoiku"><b>横浜保育室</b></li>
+                    <li class='menu-li' id="listNinkagai"><b>認可外</b></li>
+                    <li class='menu-li' id="listHandicap"><b>障害児通所支援</b></li>
+                    <li class='menu-li' id="listGakudou"><b>学童保育</b></li>
+                    <li class='menu-li' id="listKindergarten"><b>幼</b></li>
+                    <li class='menu-li' id="listElementarySchool"><b>小</b></li>
+                    <li class='menu-li' id="listMiddleSchool"><b>中</b></li>
+                </ul>
+            </li>
+            <li>
+                <ul id="menu-control-ul">
+                    <li class='menu-li' id="listFilter"><b>検索</b>
+                        <img width="10" height="10" src="images/filter-black.png">
+                    </li>
+                    <li class='menu-li' id="listNewSchool"><b>新設園</b>
+                        <img width="10" height="10" src="images/filter-black.png">
+                    </li>
+                    <select class='menu-select' id="selectBaseMap">
+                        <option selected hidden>背景</option>
+                    </select>
+                    <select class='menu-select' id="selectStation">
+                        <option selected>最寄駅</option>
+                    </select>
+                    <select class='menu-select' id="selectCircle">
+                        <option value="">円消去</option>
+                        <option value="500">半径 500m</option>
+                        <option value="1000">半径 1km</option>
+                        <option value="3000">半径 3km</option>
+                        <option value="5000">半径 5km</option>
+                    </select>
+                    <li class='menu-li' id="listHelp">
+                        <img style="vertical-align: middle" width="16" height="16" src="images/question-circle.png">
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div id="filter-popup-div">
+        <div id="filter-popup-close">
+            <img style="padding: 3px 3px;" width="15" height="15" src="images/delete-white.png">
+        </div>
+        <div style="font-size: 20px;">
+            <b>保育施設 絞り込み</b>
+        </div>
+
+        <div style="padding:5px;"></div>
+        <div id="filter-input-div">
+            施設名キーワード
+            <input type="text" id="nameKeyword">
+            <button id="btnNewSchool"><b>新設園</b></button>
+        </div>
+
+        <div style="padding:10px;"></div>
+        公立認可保育園
+        <ul class="filter-ul">
+            <li class='filter-li-select'><select id="PubNinkaOpenTime">開園</select></li>
+            <li class='filter-li-select'><select id="PubNinkaCloseTime">終演</select></li>
+            <li class='filter-li' id="PubNinkaH24"><b>24時間</b></li>
+            <li class='filter-li' id="PubNinkaIchijiHoiku"><b>一時保育</b></li>
+            <li class='filter-li' id="PubNinkaYakan"><b>夜間</b></li>
+            <li class='filter-li' id="PubNinkaKyujitu"><b>休日</b></li>
+            <li class='filter-li' id="PubNinkaEncho"><b>延長保育</b></li>
+        </ul>
+
+        <div style="padding:5px;"></div>
+        私立認可保育園
+        <ul class="filter-ul">
+            <li class='filter-li-select'><select id="PriNinkaOpenTime">開園</select></li>
+            <li class='filter-li-select'><select id="PriNinkaCloseTime">終演</select></li>
+            <li class='filter-li' id="PriNinkaH24"><b>24時間</b></li>
+            <li class='filter-li' id="PriNinkaIchijiHoiku"><b>一時保育</b></li>
+            <li class='filter-li' id="PriNinkaYakan"><b>夜間</b></li>
+            <li class='filter-li' id="PriNinkaKyujitu"><b>休日</b></li>
+            <li class='filter-li' id="PriNinkaEncho"><b>延長保育</b></li>
+        </ul>
+    
+        <div style="padding:5px;"></div>
+        横浜保育室
+        <ul class="filter-ul">
+            <li class='filter-li-select'><select id="YhoikuOpenTime">開園</select></li>
+            <li class='filter-li-select'><select id="YhoikuCloseTime">終演</select></li>
+            <li class='filter-li' id="YhoikuH24"><b>24時間</b></li>
+            <li class='filter-li' id="YhoikuIchijiHoiku"><b>一時保育</b></li>
+            <li class='filter-li' id="YhoikuYakan"><b>夜間</b></li>
+            <li class='filter-li' id="YhoikuKyujitu"><b>休日</b></li>
+            <li class='filter-li' id="YhoikuEncho"><b>延長保育</b></li>
+        </ul>
+
+        <div style="padding:5px;"></div>
+        認可外保育園
+        <ul class="filter-ul">
+            <li class='filter-li-select'><select id="NinkagaiOpenTime">開園</select></li>
+            <li class='filter-li-select'><select id="NinkagaiCloseTime">終演</select></li>
+            <li class='filter-li' id="NinkagaiH24"><b>24時間</b></li>
+            <li class='filter-li' id="NinkagaiIchijiHoiku"><b>一時保育</b></li>
+            <li class='filter-li' id="NinkagaiYakan"><b>夜間</b></li>
+            <li class='filter-li' id="NinkagaiKyujitu"><b>休日</b></li>
+            <li class='filter-li' id="NinkagaiEncho"><b>延長保育</b></li>
+        </ul>
+
+        <div style="padding:5px;"></div>
+        幼稚園
+        <ul class="filter-ul">
+            <li class='filter-li-select'><select id="KindergartenOpenTime">開園</select></li>
+            <li class='filter-li-select'><select id="KindergartenCloseTime">終演</select></li>
+            <li class='filter-li' id="KindergartenH24"><b>24時間</b></li>
+            <li class='filter-li' id="KindergartenIchijiHoiku"><b>一時保育</b></li>
+            <li class='filter-li' id="KindergartenYakan"><b>夜間</b></li>
+            <li class='filter-li' id="KindergartenKyujitu"><b>休日</b></li>
+            <li class='filter-li' id="KindergartenEncho"><b>延長保育</b></li>
+        </ul>
+
+        <div style="padding:5px;"></div>
+        小規模・事業所内保育事業
+        <ul class="filter-ul">
+            <li class='filter-li-select'><select id="JigyoshoOpenTime">開園</select></li>
+            <li class='filter-li-select'><select id="JigyoshoCloseTime">終演</select></li>
+            <li class='filter-li' id="JigyoshoH24"><b>24時間</b></li>
+            <li class='filter-li' id="JigyoshoIchijiHoiku"><b>一時保育</b></li>
+            <li class='filter-li' id="JigyoshoYakan"><b>夜間</b></li>
+            <li class='filter-li' id="JigyoshoKyujitu"><b>休日</b></li>
+            <li class='filter-li' id="JigyoshoEncho"><b>延長保育</b></li>
+        </ul>
+
+        <div style="padding:5px;"></div>
+        障害児通所支援事業
+        <ul class="filter-ul">
+            <li class='filter-li-select'><select id="HandicapOpenTime">開園</select></li>
+            <li class='filter-li-select'><select id="HandicapCloseTime">終演</select></li>
+            <li class='filter-li' id="HandicapH24"><b>24時間</b></li>
+            <li class='filter-li' id="HandicapIchijiHoiku"><b>一時保育</b></li>
+            <li class='filter-li' id="HandicapYakan"><b>夜間</b></li>
+            <li class='filter-li' id="HandicapKyujitu"><b>休日</b></li>
+            <li class='filter-li' id="HandicapEncho"><b>延長保育</b></li>
+        </ul>
+
+        <div style="padding:5px;"></div>
+        学童保育
+        <ul class="filter-ul">
+            <li class='filter-li-select'><select id="GakudouOpenTime">開園</select></li>
+            <li class='filter-li-select'><select id="GakudouCloseTime">終演</select></li>
+            <li class='filter-li' id="GakudouH24"><b>24時間</b></li>
+            <li class='filter-li' id="GakudouIchijiHoiku"><b>一時保育</b></li>
+            <li class='filter-li' id="GakudouYakan"><b>夜間</b></li>
+            <li class='filter-li' id="GakudouKyujitu"><b>休日</b></li>
+            <li class='filter-li' id="GakudouEncho"><b>延長保育</b></li>
+        </ul>
+
+        <hr width="100%">
+        <ul id="filter-control-ul">
+            <li class='filter-li' id="filterApply"><b>検索実行</b></li>
+            <li class='filter-li' id="filterReset"><b>リセット</b></li>
+            <li class='filter-li' id="filteredList"><b>検索結果一覧を表示</b></li>
+        </ul>
+        <div style="padding:3px;"></div>
+
+    </div>
+    <script src="js/settings.js" type="text/javascript"></script>
+    <script src="js/utils.js" type="text/javascript"></script>
+    <script src="js/filter.js" type="text/javascript"></script>
+    <script src="js/map.js" type="text/javascript"></script>
+    <script src="js/index.js" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+html, body, #mapid {
+    height: 100%;
+    width: 100vw;
+}
+
+#mapid {
+    z-index: 1;
+}
+
+/* 保育園施設アイコン */
+.pubninka-icon {
+    padding: 10;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: green;
+}
+.yhoiku-icon {
+    padding: 10;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: dodgerblue;
+}
+.kindergarten-icon {
+    padding: 10;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: red;
+}
+.ninkagai-icon {
+    padding: 10;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: mediumblue;
+}
+.jigyosho-icon {
+    padding: 10;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: mediumpurple;
+}
+.gakudou-icon {
+    padding: 10;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: darkgoldenrod;
+}
+.prininka-icon {
+    padding: 10;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: greenyellow;
+}
+.handicap-icon {
+    padding: 10;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: salmon;
+}

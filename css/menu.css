@@ -1,0 +1,127 @@
+#menu-btn-div, #menu-div {
+    position: fixed;
+    top: 0;  
+    z-index: 2;
+	padding: 0;
+	margin: 0;
+}
+
+#menu-btn-div {
+    display: none;
+    top: 2px;
+    right: 7px;
+}
+
+#menu-btn {
+    background-color: white;
+	border: groove white;
+    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+    padding: 5px 8px 5px 8px;
+    margin: 0;
+}
+#menu-btn:hover {
+	background-color: lightblue;
+}
+
+#menu-div {
+    left: 50px;
+}
+
+#menu-div ul {
+    padding: 0;
+    margin: 0;
+    /* letter-spacing: -0.5em; */
+    font-size: 0;
+}
+
+#menu-div ul li {
+    display: inline-block;
+    margin: 0;
+}
+
+.menu-li {
+    color: white;
+	border: groove white;
+    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+    padding: 5px 8px 5px 8px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.menu-select {
+    border: groove white;
+    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+    padding: 6px 0px 7px 7px;
+    font-weight: bold;
+    background-color: white;
+    cursor: pointer;
+}
+.menu-select:focus {
+    outline: none;
+}
+
+#menu-control-ul .menu-li {
+    color: black;
+    background-color: white;
+}
+
+#listNewSchool.cls-layer-on {
+    color: red;
+}
+
+#menu-facility-ul .menu-li:hover {
+    color: lightblue;
+}
+#menu-control-ul .menu-li:hover {
+    background-color: rgba(240,240,240,0.8);
+}
+
+#menu-facility-ul .cls-layer-off {
+    color: grey;
+    background-color: rgba(240,240,240,0.8);
+}
+
+/* #selectBaseMap {
+    width: 50px;
+}
+#selectStation {
+    width: 65px;
+}
+#selectCircle {
+    width: 65px;
+} */
+
+#listHelp {
+    padding-bottom: 5px;
+}
+
+#listPubNinka {
+	background-color: green;
+}
+#listPriNinka {
+	background-color: greenyellow;
+}
+#listJigyosho {
+	background-color: mediumpurple;
+}
+#listYhoiku {
+	background-color: dodgerblue;
+}
+#listNinkagai {
+	background-color: mediumblue;
+}
+#listHandicap {
+	background-color: salmon;
+}
+#listGakudou {
+	background-color: darkgoldenrod;
+}
+#listKindergarten {
+	background-color: red;
+}
+#listElementarySchool {
+	background-color: green;
+}
+#listMiddleSchool {
+	background-color: grey;
+}

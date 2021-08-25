@@ -1,0 +1,35 @@
+
+span {
+    font-size: small;
+}
+  
+.table {
+    font-size: small;
+}
+  
+th, td {
+    text-align: center;
+    vertical-align: middle;
+}
+  
+tbody tr:hover{
+    background-color: #e8ecf2;
+}
+
+td ul, td li {
+    list-style:none;
+    padding: 0px;
+    margin: 0px;
+}
+
+td li {
+    padding-top: 2px;
+}
+
+.table > tbody > tr > td {
+    vertical-align: middle;
+}
+
+tr:nth-child(odd) {
+    background-color: #f4f5f7;
+}

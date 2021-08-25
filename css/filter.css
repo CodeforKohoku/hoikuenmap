@@ -1,0 +1,109 @@
+#filter-popup-div {
+    position: fixed;
+    display: none;
+    top: 50%;
+    left: 50%;
+    z-index: 500;
+    /* width: 300px; */
+	border: groove white;
+    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+    box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.4);
+    background: white;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    padding: 5px 5px 5px 5px;
+}
+
+#filter-popup-close {
+    position: absolute;
+    bottom: 97%;
+    left: 95%;
+    border-radius: 50%;
+    border: solid 4px rgba(240,240,240,1.0);
+    width: 22px;
+    height: 22px;
+    background-color: rgba(180,180,180,1.0);
+    padding: 1px 1px 1px 2px;
+    cursor: pointer;
+}
+
+#nameKeyword {
+    border: inset 1px lightgray;   
+    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+    height: 25px;
+    width: 230px;
+    font-size: 16px;
+}
+#nameKeyword, #btnNewSchool {
+    outline: none;
+}
+
+#btnNewSchool {
+    margin-left: 4px;
+    padding: 5px 10px 4px 10px;
+    border: solid 1px lightgray;
+    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+    font-size: 13px;
+    background-color: rgba(245,245,245,1.0);
+    cursor: pointer;
+}
+#filter-input-div .cls-filter-on {
+    color: red;
+}
+
+.filter-ul {
+    margin:0;
+    padding:0;
+    list-style: none;
+    border: solid 1px lightgray;
+    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+}
+
+#filter-control-ul {
+    width: 284px;
+    margin:0;
+    padding:0;
+    list-style: none;
+    border: solid 1px lightgray;
+    border-radius: 5px 5px 5px 5px / 5px 5px 5px 5px;
+}
+
+.filter-li, .filter-li-select {
+    display: table-cell;
+    *display: inline-block;
+    padding: 6px 10px 5px 10px;
+    white-space: nowrap;
+    font-size: 13px;
+    background-color: rgba(245,245,245,1.0);
+    cursor: pointer;
+}
+
+.filter-li {
+    border-left: solid 1px lightgray;
+}
+
+.filter-li:hover, .filter-li-select:hover, #btnNewSchool:hover {
+    background-color: rgba(235,235,235,1.0);
+}
+
+.filter-ul .cls-filter-on, #filteredList.cls-filter-on {
+    background-color: lightgrey;
+}
+
+.filter-ul .cls-filter-on:hover {
+    background-color: lightgrey; /* hover停止 */
+}
+
+.filter-ul select {
+    margin: 0;
+    border: 0;
+    font-weight: bold;
+    vertical-align: middle;  /* alignment adjustment */
+    background-color: rgba(225, 255, 255, 0.0);
+    padding-bottom: 4px;
+    width: 48px;
+    cursor: pointer;
+}
+.filter-ul select:focus {
+    outline: none;
+}
