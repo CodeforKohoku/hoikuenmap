@@ -141,20 +141,20 @@ const getNurseryPopupHtml = (feature) => {
     if (p['重心（放課後デイ）'])   {info += `(${p['重心（放課後デイ）']})`};
 
     table('区分', p.Type);
-    if (p.Open && p.Close) table('時間',     p.Open + '〜' + p.Close);
-    if (p.Memo)            table('',         p.Memo);
-    if (info)              table('',           info);
-    if (p.AgeS && p.AgeE)  table('年齢',     p.AgeS + '〜' + p.AgeE);
-    if (p.Full)            table('定員',     p.Full);
-    if (p.TEL)             table('TEL',      p.TEL);
-    if (p.FAX)             table('FAX',      p.FAX);
-    if (p.Add1 || p.Add2)  table('住所',     p.Add1 + p.Add2);
-    if (p.url)             table('Web', `<a href=${p.url} target="_blank">${p.url}</a>`);
-    if (p.Owner)           table('設置者',   p.Owner);
-    if (p['設立年度'])     table('設立年度', p['設立年度']);
+    if (p.Open && p.Close) table('時間',       p.Open + '〜' + p.Close);
+    if (p.Memo)            table('',           p.Memo);
+    if (info)              table('',             info);
+    if (p.AgeS && p.AgeE)  table('年齢',       p.AgeS + '〜' + p.AgeE);
+    if (p.Full)            table('定員',       p.Full);
+    if (p.TEL)             table('TEL',        p.TEL);
+    if (p.FAX)             table('FAX',        p.FAX);
+    if (p.Add1 || p.Add2)  table('住所',       p.Add1 + p.Add2);
+    if (p.url)             table('Web',      `<a href=${p.url} target="_blank">施設のページを開く</a>`);
+    if (p.Owner)           table('設置者',     p.Owner);
+    if (p['設立年度'])     table('設立年度',   p['設立年度']);
     if (p['プレ幼稚園'])   table('プレ幼稚園',(p['プレ幼稚園'] === 'Y') ? "あり" : "なし");
     if (p['園バス'])       table('園バス',    (p['園バス'] === 'Y')     ? "あり" : "なし");
-    if (p['給食'])         table('給食',     p['給食']);
+    if (p['給食'])         table('給食',       p['給食']);
 
     return table.done();
 };
