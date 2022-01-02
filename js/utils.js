@@ -141,18 +141,6 @@ const addSelectBoxOptions = (id, optList) => {
     });
 };
 
-const htmlTableBuilder = () => {
-    var content = '<table><tbody>';
-    const fn = (th, td) => {
-        content += '<tr>';
-        content += `<th>${th}</th>`;
-        content += `<td>${td}</td>`;
-        content += '</tr>';
-    }
-    fn.done = () => content += '</tbody></table>';
-    return fn;
-};
-
 // メニューバーとロゴをWindowサイズに合わせて配置を変更する
 const menuResizeHandle = () => {
     const menuDiv = document.getElementById("menu-div");

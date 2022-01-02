@@ -113,86 +113,50 @@ const nurseryOnEachFeature = (feature, layer) => {
     );
 };
 
-const isPropTrue = (prop) => {
-    return prop && prop !== 'N' && prop !== 'なし'
+const popHtmlTableBuilder = (name) => {
+    var content = '<table><tbody>';
+    const fn = (th, td) => {
+        content += '<tr>';
+        content += `<th>${th}</th>`;
+        content += `<td>${td}</td>`;
+        content += '</tr>';
+    }
+    fn.done = () => `<b>${name}</b></br>${content}</tbody></table>`;
+    return fn;
 };
 
 const getNurseryPopupHtml = (feature) => {
     const p = feature.properties;
-    let txt = `<b>${p.Name}</b></br>`;
+    const table = popHtmlTableBuilder(p.Name);
 
-    table = htmlTableBuilder();
-    table('区分', p.Type);
-    
-    if (p.Open && p.Close) {
-        table('時間', p.Open + '〜' + p.Close);
-    }
-
-    if (p.Memo) {
-        table('', p.Memo);
-    }
-
-    // table content without header
     let info = "";
-    if (p.Temp)     {info += '一時保育 '};
-    if (p.Holiday)  {info += '休日保育 '};
-    if (p.Night)    {info += '夜間保育 '};
-    if (p.H24)      {info += '24時間 '};
-    if (p.Extra)    {info += '延長保育 '};
-    if (isPropTrue(p['児童発達支援']))      {info += '児童発達支援 '};
-    if (isPropTrue(p['重心（児童発達）']))   {info += `(${p['重心（児童発達）']})`};
-    if (isPropTrue(p['放課後デイ']))        {info += '放課後デイ '};
-    if (isPropTrue(p['重心（放課後デイ）'])) {info += `(${p['重心（放課後デイ）']})`};
+    if (p.Temp    === 'Y')         {info += '一時保育 '};
+    if (p.Holiday === 'Y')         {info += '休日保育 '};
+    if (p.Night   === 'Y')         {info += '夜間保育 '};
+    if (p.H24     === 'Y')         {info += '24時間 '  };
+    if (p.Extra   === 'Y')         {info += '延長保育 '};
+    if (p['児童発達支援'] === 'Y') {info += '児童発達支援 '};
+    if (p['重心（児童発達）'])     {info += `(${p['重心（児童発達）']})`};
+    if (p['放課後デイ']   === 'Y') {info += '放課後デイ '};
+    if (p['重心（放課後デイ）'])   {info += `(${p['重心（放課後デイ）']})`};
 
-    if (info) {
-        table('', info);
-    }
+    table('区分', p.Type);
+    if (p.Open && p.Close) table('時間',     p.Open + '〜' + p.Close);
+    if (p.Memo)            table('',         p.Memo);
+    if (info)              table('',           info);
+    if (p.AgeS && p.AgeE)  table('年齢',     p.AgeS + '〜' + p.AgeE);
+    if (p.Full)            table('定員',     p.Full);
+    if (p.TEL)             table('TEL',      p.TEL);
+    if (p.FAX)             table('FAX',      p.FAX);
+    if (p.Add1 || p.Add2)  table('住所',     p.Add1 + p.Add2);
+    if (p.url)             table('Web', `<a href=${p.url} target="_blank">${p.url}</a>`);
+    if (p.Owner)           table('設置者',   p.Owner);
+    if (p['設立年度'])     table('設立年度', p['設立年度']);
+    if (p['プレ幼稚園'])   table('プレ幼稚園',(p['プレ幼稚園'] === 'Y') ? "あり" : "なし");
+    if (p['園バス'])       table('園バス',    (p['園バス'] === 'Y')     ? "あり" : "なし");
+    if (p['給食'])         table('給食',     p['給食']);
 
-    if (p.AgeS && p.AgeE) {
-        table('年齢', p.AgeS + '〜' + p.AgeE);
-    }
-
-    if (p.Full) {
-        table('定員', p.Full);
-    }
-
-    if (p.TEL) {
-        table('TEL', p.TEL);
-    }
-
-    if (p.FAX) {
-        table('FAX', p.FAX);
-    }
-
-    if (p.Add1 || p.Add2) {
-        table('住所', p.Add1 + p.Add2);
-    }
-
-    if (p.url) {
-        table('Web', `<a href=${p.url} target="_blank">${p.url}</a>`);
-    }
-
-    if (p.Owner) {
-        table('設置者', p.Owner);
-    }
-
-    if (p['設立年度']) {
-        table('設立年度', p['設立年度']);
-    }
-
-    if (isPropTrue(p['プレ幼稚園'])) {
-        table('プレ幼稚園', (p['プレ幼稚園'] === 'Y') ? "あり" : "なし");
-    }
-
-    if (isPropTrue(p['園バス'])) {
-        table('園バス', (p['園バス'] === 'Y') ? "あり" : "なし");
-    }
-
-    if (isPropTrue(p['給食'])) {
-        table('給食', p['給食']);
-    }
-
-    return txt + table.done();
+    return table.done();
 };
 
 const loadStations = (map) => {

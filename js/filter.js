@@ -171,19 +171,19 @@ const filterCloseTime = (layerGroup, layerRemoved, value) => {
 };
 
 const filter24H = (layerGroup, layerRemoved, _) => {
-    filterLayerGroup(layerGroup, layerRemoved, 'H24', (value) => isPropTrue(value));
+    filterLayerGroup(layerGroup, layerRemoved, 'H24',     (value) => value === 'Y');
 };
 const filterIchijiHoiku = (layerGroup, layerRemoved, _) => {
-    filterLayerGroup(layerGroup, layerRemoved, 'Temp', (value) => isPropTrue(value));
+    filterLayerGroup(layerGroup, layerRemoved, 'Temp',    (value) => value === 'Y');
 };
 const filterYakan = (layerGroup, layerRemoved, _) => {
-    filterLayerGroup(layerGroup, layerRemoved, 'Night', (value) => isPropTrue(value));
+    filterLayerGroup(layerGroup, layerRemoved, 'Night',   (value) => value === 'Y');
 };
 const filterKyujitu = (layerGroup, layerRemoved, _) => {
-    filterLayerGroup(layerGroup, layerRemoved, 'Holiday', (value) => isPropTrue(value));
+    filterLayerGroup(layerGroup, layerRemoved, 'Holiday', (value) => value === 'Y');
 };
 const filterEncho = (layerGroup, layerRemoved, _) => {
-    filterLayerGroup(layerGroup, layerRemoved, 'Extra', (value) => isPropTrue(value));
+    filterLayerGroup(layerGroup, layerRemoved, 'Extra',   (value) => value === 'Y');
 };
 
 const filterNameKeyword = (layerGroup, layerRemoved, keyword) => {
