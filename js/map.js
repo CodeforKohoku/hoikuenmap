@@ -129,6 +129,12 @@ const getNurseryPopupHtml = (feature) => {
     const p = feature.properties;
     const table = popHtmlTableBuilder(p.Name);
 
+	const popFounded = (yyyymm) => {
+		const y = Math.floor(yyyymm / 100) + '年';
+		const m = yyyymm % 100;
+		return m ? y + m + '月' : y;
+	};
+
     let info = "";
     if (p.Temp    === 'Y')         {info += '一時保育 '};
     if (p.Holiday === 'Y')         {info += '休日保育 '};
@@ -151,7 +157,7 @@ const getNurseryPopupHtml = (feature) => {
     if (p.Add1 || p.Add2)  table('住所',       p.Add1 + p.Add2);
     if (p.url)             table('Web',      `<a href=${p.url} target="_blank">施設のページを開く</a>`);
     if (p.Owner)           table('設置者',     p.Owner);
-    if (p['設立年度'])     table('設立年度',   p['設立年度']);
+    if (p['設立年度'])     table('設立',       popFounded(p['設立年度']));
     if (p['プレ幼稚園'])   table('プレ幼稚園',(p['プレ幼稚園'] === 'Y') ? "あり" : "なし");
     if (p['園バス'])       table('園バス',    (p['園バス'] === 'Y')     ? "あり" : "なし");
     if (p['給食'])         table('給食',       p['給食']);

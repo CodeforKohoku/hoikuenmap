@@ -191,7 +191,15 @@ const filterNameKeyword = (layerGroup, layerRemoved, keyword) => {
 };
 
 const filterNewSchool = (layerGroup, layerRemoved, _) => {
-    filterLayerGroup(layerGroup, layerRemoved, 'Name', (value) => value.includes('（新設・仮称）'));
+	const d = new Date();
+	const y = d.getFullYear() - 1;
+	const m = d.getMonth() + 1; // 戻り値は0から11の範囲
+	const newSchoolThreshold = y * 100 + m;
+
+    return filterLayerGroup(layerGroup, layerRemoved, '設立年度', (value) => {
+		if (!(value % 100)) value += 4;
+		return value > newSchoolThreshold;
+	});
 };
 
 FILTER_HANDLE.OpenTime = filterOpenTime;
