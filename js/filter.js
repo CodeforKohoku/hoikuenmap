@@ -196,7 +196,7 @@ const filterNewSchool = (layerGroup, layerRemoved, _) => {
 	const m = d.getMonth() + 1; // 戻り値は0から11の範囲
 	const newSchoolThreshold = y * 100 + m;
 
-    return filterLayerGroup(layerGroup, layerRemoved, '設立年度', (value) => {
+    return filterLayerGroup(layerGroup, layerRemoved, '設立年月', (value) => {
 		if (!(value % 100)) value += 4;
 		return value > newSchoolThreshold;
 	});
